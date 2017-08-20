@@ -96,7 +96,7 @@ static struct s3c2410_uartcfg smdk2440_uartcfgs[] __initdata = {
 		.hwport	     = 2,
 		.flags	     = 0,
 		.ucon	     = 0x3c5,
-		.ulcon	     = 0x43,
+		.ulcon	     = 0x03,
 		.ufcon	     = 0x51,
 	}
 };

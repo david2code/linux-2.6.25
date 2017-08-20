@@ -515,6 +515,15 @@ static int s3c24xx_serial_startup(struct uart_port *port)
 	dbg("s3c24xx_serial_startup: port=%p (%08lx,%p)\n",
 	    port->mapbase, port->membase);
 
+	if(port->line == 2)
+	{
+		s3c2410_gpio_cfgpin(S3C2410_GPH6, S3C2410_GPH6_TXD2);
+		s3c2410_gpio_pullup(S3C2410_GPH6, 1);
+
+		s3c2410_gpio_cfgpin(S3C2410_GPH7, S3C2410_GPH7_RXD2);
+		s3c2410_gpio_pullup(S3C2410_GPH7, 1);
+	}
+
 	rx_enabled(port) = 1;
 
 	ret = request_irq(RX_IRQ(port),
@@ -946,7 +955,7 @@ static struct uart_ops s3c24xx_serial_ops = {
 
 static struct uart_driver s3c24xx_uart_drv = {
 	.owner		= THIS_MODULE,
-	.dev_name	= "s3c2410_serial",
+	.dev_name	= "david2440_serial",
 	.nr		= 3,
 	.cons		= S3C24XX_SERIAL_CONSOLE,
 	.driver_name	= S3C24XX_SERIAL_NAME,
